@@ -1,5 +1,5 @@
 {
-  "name": "@yosmy/authentication-backend",
+  "name": "@yosmy/authentication-event-backend",
   "version": "0.1.0",
   "private": true,
   "main": "build/index.js",

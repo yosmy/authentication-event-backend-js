@@ -5,13 +5,13 @@ import {EventInvolved} from "@yosmy/event";
 import {Device, DevicePlaceholder, enrich as deviceEnrich} from "@yosmy/device";
 import {enrichDevices} from "./CommonEvent";
 
-const type = "yosmy.start_authentication_with_password_success";
+const type = "yosmy.finish_authentication_with_password_success";
 
-const StartAuthenticationWithPasswordSuccessEvent = ({
+const FinishAuthenticationWithPasswordSuccessEvent = ({
     ui, involved, extra, date, hide, onSelectInvolved
 }) => {
     return <ui.layout
-        label={<Text>Comienzo exitoso de autenticación con pin</Text>}
+        label={<Text>Final exitoso de autenticación con pin</Text>}
         involved={[
             !hide.device && <EventInvolved
                 label="Dispositivo"
@@ -44,7 +44,7 @@ const StartAuthenticationWithPasswordSuccessEvent = ({
     />
 }
 
-StartAuthenticationWithPasswordSuccessEvent.propTypes = {
+FinishAuthenticationWithPasswordSuccessEvent.propTypes = {
     ui: PropTypes.shape({
         layout: PropTypes.func.isRequired
     }).isRequired,
@@ -56,13 +56,13 @@ StartAuthenticationWithPasswordSuccessEvent.propTypes = {
     }).isRequired,
 };
 
-StartAuthenticationWithPasswordSuccessEvent.defaultProps = {
+FinishAuthenticationWithPasswordSuccessEvent.defaultProps = {
     hide: {
         device: false,
     }
 };
 
-const enrichStartAuthenticationWithPasswordSuccessEvent = async (events, api) => {
+const enrichFinishAuthenticationWithPasswordSuccessEvent = async (events, api) => {
     events = await enrichDevices(
         events,
         api,
@@ -73,7 +73,7 @@ const enrichStartAuthenticationWithPasswordSuccessEvent = async (events, api) =>
 }
 
 export {
-    StartAuthenticationWithPasswordSuccessEvent,
-    type as StartAuthenticationWithPasswordSuccessEventType,
-    enrichStartAuthenticationWithPasswordSuccessEvent,
+    FinishAuthenticationWithPasswordSuccessEvent,
+    type as FinishAuthenticationWithPasswordSuccessEventType,
+    enrichFinishAuthenticationWithPasswordSuccessEvent,
 };

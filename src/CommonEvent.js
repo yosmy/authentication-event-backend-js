@@ -1,7 +1,7 @@
-import {enrich as phoneEnrich} from "@yosmy/phone";
+import {enrich as deviceEnrich} from "@yosmy/device";
 
-const enrichUsers = async (events, api, type) => {
-    return await phoneEnrich.enrichUsers(
+const enrichDevices = async (events, api, type) => {
+    return await deviceEnrich.enrichDevices(
         events,
         // filter
         (event) => {
@@ -9,21 +9,21 @@ const enrichUsers = async (events, api, type) => {
         },
         // pick
         (event) => {
-            return event.involved.user;
+            return event.involved.device;
         },
         // collect
-        async (users) => {
-            return await api.collectPhones(
-                users,
+        async (devices) => {
+            return await api.collectDevices(
+                devices,
             );
         },
         // enrich
-        (event, user) => {
+        (event, device) => {
             return {
                 ...event,
                 involved: {
                     ...event.involved,
-                    user: user
+                    device: device
                 }
             }
         }
@@ -31,5 +31,5 @@ const enrichUsers = async (events, api, type) => {
 };
 
 export {
-    enrichUsers
+    enrichDevices,
 };

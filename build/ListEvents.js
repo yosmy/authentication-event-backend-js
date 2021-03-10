@@ -25,7 +25,7 @@ var ListEvents = function ListEvents(_ref) {
   var ui = _ref.ui,
       api = _ref.api,
       criteria = _ref.criteria,
-      onSelectUser = _ref.onSelectUser;
+      onSelectDevice = _ref.onSelectDevice;
   return /*#__PURE__*/_react["default"].createElement(_event.ListEvents, {
     ui: {
       layout: ui.layout,
@@ -46,11 +46,11 @@ var ListEvents = function ListEvents(_ref) {
           extra: extra,
           date: date,
           onSelectInvolved: function onSelectInvolved(type, value) {
-            if (type !== "user") {
+            if (type !== "device") {
               return;
             }
 
-            onSelectUser(value.id);
+            onSelectDevice(value.id);
           }
         });
       }
@@ -67,8 +67,8 @@ var ListEvents = function ListEvents(_ref) {
             switch (_context2.prev = _context2.next) {
               case 0:
                 _context2.next = 2;
-                return api.collectEvents(["yosmy.start_authentication_with_password_success"], {
-                  user: query.user
+                return api.collectEvents(["yosmy.start_authentication_with_password_success", "yosmy.start_authentication_with_password_fail", "yosmy.finish_authentication_with_password_success", "yosmy.finish_authentication_with_password_fail", "yosmy.start_authentication_with_code_success", "yosmy.start_authentication_with_code_fail", "yosmy.finish_authentication_with_code_success", "yosmy.finish_authentication_with_code_fail"], {
+                  device: query.device
                 }, null, query.from, query.to, skip, limit);
 
               case 2:
@@ -94,7 +94,7 @@ var ListEvents = function ListEvents(_ref) {
                             case 0:
                               _context.next = 2;
                               return (0, _enrich["default"])(events, {
-                                collectPhones: api.collectPhones
+                                collectDevices: api.collectDevices
                               });
 
                             case 2:
@@ -138,20 +138,17 @@ ListEvents.propTypes = {
   }).isRequired,
   api: _propTypes["default"].shape({
     collectEvents: _propTypes["default"].func.isRequired,
-    collectPhones: _propTypes["default"].func.isRequired,
-    collectCards: _propTypes["default"].func.isRequired,
-    collectCharges: _propTypes["default"].func.isRequired
+    collectDevices: _propTypes["default"].func.isRequired
   }).isRequired,
   criteria: _propTypes["default"].shape({
     query: _propTypes["default"].shape({
-      user: _propTypes["default"].string,
+      device: _propTypes["default"].string,
       from: _propTypes["default"].number,
       to: _propTypes["default"].number
     }).isRequired,
     limit: _propTypes["default"].number.isRequired
   }).isRequired,
-  onSelectUser: _propTypes["default"].func.isRequired // (id)
-
+  onSelectDevice: _propTypes["default"].func.isRequired
 };
 var _default = ListEvents;
 exports["default"] = _default;

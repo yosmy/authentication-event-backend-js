@@ -5,7 +5,7 @@ import enrich from "./enrich";
 import resolve from "./resolve";
 
 const ListEvents = ({
-    ui, api, criteria, onSelectUser
+    ui, api, criteria, onSelectDevice
 }) => {
     return <BaseListEvents
         ui={{
@@ -24,11 +24,11 @@ const ListEvents = ({
                     extra={extra}
                     date={date}
                     onSelectInvolved={(type, value) => {
-                        if (type !== "user") {
+                        if (type !== "device") {
                             return;
                         }
 
-                        onSelectUser(value.id);
+                        onSelectDevice(value.id);
                     }}
                 />
             }
@@ -41,9 +41,16 @@ const ListEvents = ({
             const events = await api.collectEvents(
                 [
                     "yosmy.start_authentication_with_password_success",
+                    "yosmy.start_authentication_with_password_fail",
+                    "yosmy.finish_authentication_with_password_success",
+                    "yosmy.finish_authentication_with_password_fail",
+                    "yosmy.start_authentication_with_code_success",
+                    "yosmy.start_authentication_with_code_fail",
+                    "yosmy.finish_authentication_with_code_success",
+                    "yosmy.finish_authentication_with_code_fail",
                 ],
                 {
-                    user: query.user
+                    device: query.device
                 },
                 null,
                 query.from,
@@ -64,7 +71,7 @@ const ListEvents = ({
                     events = await enrich(
                         events,
                         {
-                            collectPhones: api.collectPhones,
+                            collectDevices: api.collectDevices,
                         }
                     );
 
@@ -81,19 +88,17 @@ ListEvents.propTypes = {
     }).isRequired,
     api: PropTypes.shape({
         collectEvents: PropTypes.func.isRequired,
-        collectPhones: PropTypes.func.isRequired,
-        collectCards: PropTypes.func.isRequired,
-        collectCharges: PropTypes.func.isRequired,
+        collectDevices: PropTypes.func.isRequired,
     }).isRequired,
     criteria: PropTypes.shape({
         query: PropTypes.shape({
-            user: PropTypes.string,
+            device: PropTypes.string,
             from: PropTypes.number,
             to: PropTypes.number,
         }).isRequired,
         limit: PropTypes.number.isRequired,
     }).isRequired,
-    onSelectUser: PropTypes.func.isRequired // (id)
+    onSelectDevice: PropTypes.func.isRequired
 };
 
 export default ListEvents;

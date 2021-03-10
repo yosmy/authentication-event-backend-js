@@ -5,13 +5,13 @@ import {EventInvolved} from "@yosmy/event";
 import {Device, DevicePlaceholder, enrich as deviceEnrich} from "@yosmy/device";
 import {enrichDevices} from "./CommonEvent";
 
-const type = "yosmy.start_authentication_with_password_success";
+const type = "yosmy.finish_authentication_with_password_fail";
 
-const StartAuthenticationWithPasswordSuccessEvent = ({
+const FinishAuthenticationWithPasswordFailEvent = ({
     ui, involved, extra, date, hide, onSelectInvolved
 }) => {
     return <ui.layout
-        label={<Text>Comienzo exitoso de autenticación con pin</Text>}
+        label={<Text>Final fallido  de autenticación con pin</Text>}
         involved={[
             !hide.device && <EventInvolved
                 label="Dispositivo"
@@ -38,13 +38,18 @@ const StartAuthenticationWithPasswordSuccessEvent = ({
                     number: involved.number,
                 }}</Json>
             </EventInvolved>,
+            <EventInvolved
+                label="Pin"
+            >
+                <Text>{involved.password}</Text>
+            </EventInvolved>
         ]}
         extra={<Json>{extra}</Json>}
         date={date}
     />
 }
 
-StartAuthenticationWithPasswordSuccessEvent.propTypes = {
+FinishAuthenticationWithPasswordFailEvent.propTypes = {
     ui: PropTypes.shape({
         layout: PropTypes.func.isRequired
     }).isRequired,
@@ -56,13 +61,13 @@ StartAuthenticationWithPasswordSuccessEvent.propTypes = {
     }).isRequired,
 };
 
-StartAuthenticationWithPasswordSuccessEvent.defaultProps = {
+FinishAuthenticationWithPasswordFailEvent.defaultProps = {
     hide: {
         device: false,
     }
 };
 
-const enrichStartAuthenticationWithPasswordSuccessEvent = async (events, api) => {
+const enrichFinishAuthenticationWithPasswordFailEvent = async (events, api) => {
     events = await enrichDevices(
         events,
         api,
@@ -73,7 +78,7 @@ const enrichStartAuthenticationWithPasswordSuccessEvent = async (events, api) =>
 }
 
 export {
-    StartAuthenticationWithPasswordSuccessEvent,
-    type as StartAuthenticationWithPasswordSuccessEventType,
-    enrichStartAuthenticationWithPasswordSuccessEvent,
+    FinishAuthenticationWithPasswordFailEvent,
+    type as FinishAuthenticationWithPasswordFailEventType,
+    enrichFinishAuthenticationWithPasswordFailEvent,
 };

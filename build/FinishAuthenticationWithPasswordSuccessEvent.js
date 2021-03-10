@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.enrichStartAuthenticationWithPasswordSuccessEvent = exports.StartAuthenticationWithPasswordSuccessEventType = exports.StartAuthenticationWithPasswordSuccessEvent = void 0;
+exports.enrichFinishAuthenticationWithPasswordSuccessEvent = exports.FinishAuthenticationWithPasswordSuccessEventType = exports.FinishAuthenticationWithPasswordSuccessEvent = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
@@ -23,10 +23,10 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
-var type = "yosmy.start_authentication_with_password_success";
-exports.StartAuthenticationWithPasswordSuccessEventType = type;
+var type = "yosmy.finish_authentication_with_password_success";
+exports.FinishAuthenticationWithPasswordSuccessEventType = type;
 
-var StartAuthenticationWithPasswordSuccessEvent = function StartAuthenticationWithPasswordSuccessEvent(_ref) {
+var FinishAuthenticationWithPasswordSuccessEvent = function FinishAuthenticationWithPasswordSuccessEvent(_ref) {
   var ui = _ref.ui,
       involved = _ref.involved,
       extra = _ref.extra,
@@ -34,7 +34,7 @@ var StartAuthenticationWithPasswordSuccessEvent = function StartAuthenticationWi
       hide = _ref.hide,
       onSelectInvolved = _ref.onSelectInvolved;
   return /*#__PURE__*/_react["default"].createElement(ui.layout, {
-    label: /*#__PURE__*/_react["default"].createElement(_ui.Text, null, "Comienzo exitoso de autenticaci\xF3n con pin"),
+    label: /*#__PURE__*/_react["default"].createElement(_ui.Text, null, "Final exitoso de autenticaci\xF3n con pin"),
     involved: [!hide.device && /*#__PURE__*/_react["default"].createElement(_event.EventInvolved, {
       label: "Dispositivo"
     }, typeof involved.device === "string" ? /*#__PURE__*/_react["default"].createElement(_device.DevicePlaceholder, null) : /*#__PURE__*/_react["default"].createElement(_device.Device, {
@@ -54,8 +54,8 @@ var StartAuthenticationWithPasswordSuccessEvent = function StartAuthenticationWi
   });
 };
 
-exports.StartAuthenticationWithPasswordSuccessEvent = StartAuthenticationWithPasswordSuccessEvent;
-StartAuthenticationWithPasswordSuccessEvent.propTypes = {
+exports.FinishAuthenticationWithPasswordSuccessEvent = FinishAuthenticationWithPasswordSuccessEvent;
+FinishAuthenticationWithPasswordSuccessEvent.propTypes = {
   ui: _propTypes["default"].shape({
     layout: _propTypes["default"].func.isRequired
   }).isRequired,
@@ -66,13 +66,13 @@ StartAuthenticationWithPasswordSuccessEvent.propTypes = {
     device: _propTypes["default"].bool
   }).isRequired
 };
-StartAuthenticationWithPasswordSuccessEvent.defaultProps = {
+FinishAuthenticationWithPasswordSuccessEvent.defaultProps = {
   hide: {
     device: false
   }
 };
 
-var enrichStartAuthenticationWithPasswordSuccessEvent = /*#__PURE__*/function () {
+var enrichFinishAuthenticationWithPasswordSuccessEvent = /*#__PURE__*/function () {
   var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(events, api) {
     return regeneratorRuntime.wrap(function _callee$(_context) {
       while (1) {
@@ -93,9 +93,9 @@ var enrichStartAuthenticationWithPasswordSuccessEvent = /*#__PURE__*/function ()
     }, _callee);
   }));
 
-  return function enrichStartAuthenticationWithPasswordSuccessEvent(_x, _x2) {
+  return function enrichFinishAuthenticationWithPasswordSuccessEvent(_x, _x2) {
     return _ref2.apply(this, arguments);
   };
 }();
 
-exports.enrichStartAuthenticationWithPasswordSuccessEvent = enrichStartAuthenticationWithPasswordSuccessEvent;
+exports.enrichFinishAuthenticationWithPasswordSuccessEvent = enrichFinishAuthenticationWithPasswordSuccessEvent;

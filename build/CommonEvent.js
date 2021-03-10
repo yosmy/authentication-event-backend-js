@@ -3,9 +3,9 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.enrichUsers = void 0;
+exports.enrichDevices = void 0;
 
-var _phone = require("@yosmy/phone");
+var _device = require("@yosmy/device");
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
@@ -17,30 +17,30 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
-var enrichUsers = /*#__PURE__*/function () {
+var enrichDevices = /*#__PURE__*/function () {
   var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(events, api, type) {
     return regeneratorRuntime.wrap(function _callee2$(_context2) {
       while (1) {
         switch (_context2.prev = _context2.next) {
           case 0:
             _context2.next = 2;
-            return _phone.enrich.enrichUsers(events, // filter
+            return _device.enrich.enrichDevices(events, // filter
             function (event) {
               return event.labels.includes(type);
             }, // pick
             function (event) {
-              return event.involved.user;
+              return event.involved.device;
             },
             /*#__PURE__*/
             // collect
             function () {
-              var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(users) {
+              var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(devices) {
                 return regeneratorRuntime.wrap(function _callee$(_context) {
                   while (1) {
                     switch (_context.prev = _context.next) {
                       case 0:
                         _context.next = 2;
-                        return api.collectPhones(users);
+                        return api.collectDevices(devices);
 
                       case 2:
                         return _context.abrupt("return", _context.sent);
@@ -57,10 +57,10 @@ var enrichUsers = /*#__PURE__*/function () {
                 return _ref2.apply(this, arguments);
               };
             }(), // enrich
-            function (event, user) {
+            function (event, device) {
               return _objectSpread(_objectSpread({}, event), {}, {
                 involved: _objectSpread(_objectSpread({}, event.involved), {}, {
-                  user: user
+                  device: device
                 })
               });
             });
@@ -76,9 +76,9 @@ var enrichUsers = /*#__PURE__*/function () {
     }, _callee2);
   }));
 
-  return function enrichUsers(_x, _x2, _x3) {
+  return function enrichDevices(_x, _x2, _x3) {
     return _ref.apply(this, arguments);
   };
 }();
 
-exports.enrichUsers = enrichUsers;
+exports.enrichDevices = enrichDevices;
